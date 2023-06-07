@@ -1,3 +1,4 @@
+import 'package:first_app/dice_roller.dart';
 import 'package:flutter/material.dart';
 
 /// Widgets being used
@@ -20,6 +21,9 @@ const startAlignment = Alignment.topLeft;
 const endAlignment = Alignment.bottomRight;
 
 //Custom widget
+//StatelessWidget great for widget that takes in inputs and outputs widgets
+//StatefulWidgets that can change internally and changes the UI
+//If the data changes inside
 class GradientContainer extends StatelessWidget {
   //Different ways to do constructor to send key to super
   //GradientContainer({key}) : super(key: key);
@@ -27,14 +31,14 @@ class GradientContainer extends StatelessWidget {
 
   //Since we need colors to have a value we need to mark it as requeired
   //A named argument is optional by default
-  GradientContainer({super.key, required this.colors});
+  const GradientContainer({super.key, required this.colors});
 
   //Multiple constructors
   //constructor with default values set already
-  GradientContainer.purple({super.key})
+  const GradientContainer.purple({super.key})
       : colors = const [Colors.deepPurple, Colors.indigo];
 
-  GradientContainer.orage({super.key})
+  const GradientContainer.orage({super.key})
       : colors = const [Colors.deepOrange, Color.fromARGB(255, 235, 175, 157)];
 
   //const is a flutter optimization
@@ -42,15 +46,6 @@ class GradientContainer extends StatelessWidget {
   //Instead of recreating it in memory
 
   final List<Color> colors;
-
-  var activeDiceImage = 'assets/images/dice-2.png';
-
-  //function
-  void rollDice() {
-    activeDiceImage = 'assets/images/dice-4.png';
-    //print statement for debuging
-    print('Changing image...');
-  }
 
   //override says it is overriding from the extended class
   @override
@@ -63,37 +58,7 @@ class GradientContainer extends StatelessWidget {
           end: endAlignment,
         ),
       ),
-      child: Center(
-        child: Column(
-          //Default value here is max
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              activeDiceImage,
-              width: 200,
-            ),
-            //This is similar to adding padding to the next child
-            //You just insert an empty widget with a height
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-              //Ananymous function () {} Can be used to quicly set a funstion
-              //Can only be used in the one spot
-              //Can set a declared function
-              //Adding () means to execute the function
-              //No () pass a pointer to the function as a value
-              onPressed: rollDice,
-              style: TextButton.styleFrom(
-                  //Can be done with an empty widget
-                  //padding: const EdgeInsets.only(top: 20),
-                  foregroundColor: Colors.white,
-                  textStyle: const TextStyle(fontSize: 28)),
-              child: const Text('Roll Dice'),
-            )
-          ],
-        ),
-      ),
+      child: const Center(child: DiceRoller()),
     );
   }
 }

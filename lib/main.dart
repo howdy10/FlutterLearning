@@ -6,7 +6,7 @@ void main() {
   //runApp is the method where the app begins
   runApp(
     //Apps should begin with Material App
-    MaterialApp(
+    const MaterialApp(
       //Scaffold is a widget that helps create a page
       home: Scaffold(
         body: GradientContainer.orage(),
